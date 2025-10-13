@@ -9,17 +9,24 @@
     // Cielo
     const sky = svg.getElementById('sky');
     sky.setAttribute('fill', isDay ? 'url(#skyDay)' : 'url(#skyNight)');
-    // Montañas
-    svg.getElementById('mountains').setAttribute('fill', isDay ? 'url(#mountainDay)' : 'url(#mountainNight)');
-    svg.getElementById('mountains2').setAttribute('fill', isDay ? 'url(#mountainDay)' : 'url(#mountainNight)');
+    // Montañas - aplicar gradientes a todas las capas
+    const mountainsBack = svg.getElementById('mountains-back');
+    const mountains = svg.getElementById('mountains');
+    const mountains2 = svg.getElementById('mountains2');
+    const mountains3 = svg.getElementById('mountains3');
+    
+    if (mountainsBack) mountainsBack.setAttribute('fill', isDay ? 'url(#mountainDay)' : 'url(#mountainNight)');
+    if (mountains) mountains.setAttribute('fill', isDay ? 'url(#mountainDay)' : 'url(#mountainNight)');
+    if (mountains2) mountains2.setAttribute('fill', isDay ? 'url(#mountainDay)' : 'url(#mountainNight)');
+    if (mountains3) mountains3.setAttribute('fill', isDay ? 'url(#mountainDay)' : 'url(#mountainNight)');
     // Sol/luna
     const sunMoon = svg.getElementById('sun-moon');
     sunMoon.setAttribute('fill', isDay ? '#ff6a00' : '#fffbe6');
     // Animar posición (arco de 180°)
     const t = ((hour % 24) + now.getMinutes()/60) / 24; // 0 a 1
     const angle = isDay ? (Math.PI * (t * 2 - 0.5)) : (Math.PI * (t * 2 + 0.5));
-    const cx = 960 + 600 * Math.cos(angle);
-    const cy = 700 - 350 * Math.sin(angle);
+    const cx = 1200 + 500 * Math.cos(angle);
+    const cy = 450 - 280 * Math.sin(angle);
     sunMoon.setAttribute('cx', cx);
     sunMoon.setAttribute('cy', cy);
   }

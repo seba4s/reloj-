@@ -46,6 +46,12 @@ function updateDisplay() {
 document.getElementById('timer-form').onsubmit = e => {
   e.preventDefault();
   const min = parseInt(e.target.minutes.value, 10) || 0;
+  const sec = parseInt(e.target.seconds.value, 10) || 0;
+  
+  // Verificar que al menos hay un segundo
+  if (min === 0 && sec === 0) {
+    return;
+  }
   
   // Pedir permiso para notificaciones al iniciar un temporizador
   if (Notification.permission !== 'granted') {
@@ -55,7 +61,7 @@ document.getElementById('timer-form').onsubmit = e => {
   fetch(timerApi + 'start', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({duration: min * 60})
+    body: JSON.stringify({duration: (min * 60) + sec})
   }).then(() => {
     if (!interval) interval = setInterval(updateDisplay, 500);
   });

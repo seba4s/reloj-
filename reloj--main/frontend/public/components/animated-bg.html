@@ -53,7 +53,21 @@
     </defs>
     <rect id="sky" x="0" y="0" width="1920" height="1080" fill="url(#skyDay)"/>
     <circle id="sun-moon" cx="960" cy="700" r="90" fill="#ff6a00"/>
-    <path id="mountains" d="M0,900 Q400,700 800,900 T1600,900 T1920,1080 L0,1080 Z" fill="url(#mountainDay)"/>
-    <path id="mountains2" d="M0,1000 Q600,800 1200,1000 T1920,1080 L0,1080 Z" fill="url(#mountainDay)" opacity="0.7"/>
+    
+    <!-- Montañas del fondo con más detalle -->
+    <path id="mountains-back" d="M0,950 L200,850 L280,880 L400,750 L520,800 L700,650 L880,720 L1050,600 L1200,680 L1380,580 L1550,650 L1720,700 L1920,750 L1920,1080 L0,1080 Z" 
+          fill="url(#mountainDay)" opacity="0.4"/>
+    
+    <!-- Montañas intermedias con picos más definidos -->
+    <path id="mountains" d="M0,900 L150,820 L250,850 L380,720 L450,760 L600,650 L720,690 L850,600 L950,640 L1100,580 L1250,650 L1400,700 L1550,750 L1680,780 L1850,820 L1920,850 L1920,1080 L0,1080 Z" 
+          fill="url(#mountainDay)" opacity="0.6"/>
+    
+    <!-- Montañas del frente con más detalle y textura -->
+    <path id="mountains2" d="M0,1000 L120,920 L200,940 L350,850 L480,880 L650,800 L780,830 L900,780 L1050,820 L1200,850 L1380,900 L1550,920 L1700,950 L1850,970 L1920,990 L1920,1080 L0,1080 Z" 
+          fill="url(#mountainDay)" opacity="0.85"/>
+    
+    <!-- Capa extra de montañas frontales para más profundidad -->
+    <path id="mountains3" d="M0,1050 L180,980 L320,1000 L500,950 L680,980 L850,960 L1050,990 L1250,1010 L1450,1000 L1650,1020 L1850,1030 L1920,1040 L1920,1080 L0,1080 Z" 
+          fill="url(#mountainDay)"/>
   </svg>
 </div>

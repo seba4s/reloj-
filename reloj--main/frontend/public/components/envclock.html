@@ -2,22 +2,24 @@
   <h2 style="color: var(--header-text); margin-bottom: 1.5rem;">🌿 Reloj Ambiental</h2>
   
   <div class="component-form" style="margin-bottom: 2rem;">
-    <label>
-      Seleccionar ubicación
-      <select id="location-select" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 0.8rem 1rem; color: var(--header-text); width: 100%; min-width: 200px;">
-        <option value="Madrid">Madrid</option>
-        <option value="Buenos Aires">Buenos Aires</option>
-        <option value="New York">New York</option>
-        <option value="Tokyo">Tokyo</option>
-        <option value="London">London</option>
-        <option value="Paris">Paris</option>
-        <option value="Los Angeles">Los Angeles</option>
-        <option value="Sydney">Sydney</option>
-        <option value="Mexico City">Mexico City</option>
-        <option value="Cairo">Cairo</option>
-      </select>
-    </label>
-    <button id="update-location-btn" class="component-button">Actualizar</button>
+    <div style="display: flex; gap: 1rem; align-items: flex-end; justify-content: center;">
+      <label style="flex: 1; max-width: 250px;">
+        Seleccionar ubicación
+        <select id="location-select" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 0.8rem 1rem; color: var(--header-text); width: 100%; min-width: 200px;">
+          <option value="Madrid" style="background: #2c3e5f; color: #ffffff;">Madrid</option>
+          <option value="Buenos Aires" style="background: #2c3e5f; color: #ffffff;">Buenos Aires</option>
+          <option value="New York" style="background: #2c3e5f; color: #ffffff;">New York</option>
+          <option value="Tokyo" style="background: #2c3e5f; color: #ffffff;">Tokyo</option>
+          <option value="London" style="background: #2c3e5f; color: #ffffff;">London</option>
+          <option value="Paris" style="background: #2c3e5f; color: #ffffff;">Paris</option>
+          <option value="Los Angeles" style="background: #2c3e5f; color: #ffffff;">Los Angeles</option>
+          <option value="Sydney" style="background: #2c3e5f; color: #ffffff;">Sydney</option>
+          <option value="Mexico City" style="background: #2c3e5f; color: #ffffff;">Mexico City</option>
+          <option value="Cairo" style="background: #2c3e5f; color: #ffffff;">Cairo</option>
+        </select>
+      </label>
+      <button id="update-location-btn" class="component-button">Actualizar</button>
+    </div>
   </div>
   
   <div id="envclock-info" class="env-display">

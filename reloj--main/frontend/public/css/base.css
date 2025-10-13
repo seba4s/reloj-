@@ -17,7 +17,7 @@
   transition: all 0.3s ease;
   position: relative;
   box-sizing: border-box;
-  opacity: 70%;
+  opacity: 60%;
 }
 
 .component-container:hover {
@@ -193,6 +193,7 @@
   border: 2px solid rgba(255,255,255,0.25);
   box-shadow: 0 2px 8px rgba(0,8,69,0.10);
   transition: background 0.2s, color 0.2s, border 0.2s;
+  margin-left: auto;
 }
 #bottom-nav-bar #theme-toggle:hover, #bottom-nav-bar #theme-toggle:focus {
   background: rgba(255,255,255,0.32);

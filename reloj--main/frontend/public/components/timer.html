@@ -1,14 +1,20 @@
 <section class="component-container" id="timer-component">
   <h2 style="color: var(--header-text); margin-bottom: 1.5rem;">Temporizador</h2>
   <form id="timer-form" class="component-form">
-    <label>
-      Minutos
-      <input type="number" name="minutes" min="0" value="1">
-    </label>
-    <button type="submit" class="component-button">Iniciar</button>
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;">
+      <label>
+        Minutos
+        <input type="number" name="minutes" min="0" value="0">
+      </label>
+      <label>
+        Segundos
+        <input type="number" name="seconds" min="0" max="59" value="0">
+      </label>
+    </div>
   </form>
   <div id="timer-display" class="time-display">00:00</div>
   <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+    <button type="submit" form="timer-form" class="component-button">Iniciar</button>
     <button id="timer-stop" class="component-button">Detener</button>
     <button id="timer-reset" class="component-button">Reiniciar</button>
   </div>
