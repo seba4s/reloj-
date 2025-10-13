@@ -1,0 +1,117 @@
+/* Animaciones para el cambio de tema */
+@keyframes sunExit {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-150px, -200px);
+    opacity: 0;
+  }
+}
+
+@keyframes moonEnter {
+  0% {
+    transform: translate(150px, 200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes moonExit {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-150px, -200px);
+    opacity: 0;
+  }
+}
+
+@keyframes sunEnter {
+  0% {
+    transform: translate(150px, 200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* Transiciones suaves */
+.celestial-body {
+  transform-origin: center;
+  transition: fill 0.5s ease-in-out;
+}
+
+.bg-element {
+  transition-duration: 2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mantener las animaciones existentes del sol/luna */
+.sun-exit {
+  animation: sunExit 1s ease-in-out forwards;
+}
+
+.moon-enter {
+  animation: moonEnter 1s ease-in-out forwards;
+}
+
+.moon-exit {
+  animation: moonExit 1s ease-in-out forwards;
+}
+
+.sun-enter {
+  animation: sunEnter 1s ease-in-out forwards;
+}
+
+/* Estados del cielo con transiciones suaves */
+.sky {
+  transition-property: fill;
+  transition-duration: 1.5s;
+}
+
+.sky-day {
+  fill: url(#skyDay);
+}
+
+.sky-dawn {
+  fill: url(#skyDawn);
+}
+
+.sky-dusk {
+  fill: url(#skyDusk);
+}
+
+.sky-night {
+  fill: url(#skyNight);
+}
+
+/* Estados de las montañas con transiciones suaves */
+.mountains {
+  transition-property: fill;
+  transition-duration: 1.8s;
+  transition-delay: 0.2s;
+}
+
+.mountains-day {
+  fill: url(#mountainDay);
+}
+
+.mountains-dawn {
+  fill: url(#mountainDawn);
+}
+
+.mountains-dusk {
+  fill: url(#mountainDusk);
+}
+
+.mountains-night {
+  fill: url(#mountainNight);
+}

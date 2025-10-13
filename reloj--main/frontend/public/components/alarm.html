@@ -1,0 +1,17 @@
+<section class="component-container" id="alarm-component">
+  <h2 style="color: var(--header-text); margin-bottom: 1.5rem;">Alarmas</h2>
+  <form id="alarm-form" class="component-form">
+    <label>
+      Hora
+      <input type="time" name="time" required>
+    </label>
+    <label>
+      Etiqueta
+      <input type="text" name="label" placeholder="Descripción de la alarma">
+    </label>
+    <button type="submit" class="component-button">
+      Agregar alarma
+    </button>
+  </form>
+  <ul id="alarms-list" class="component-list"></ul>
+</section>

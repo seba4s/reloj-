@@ -1,0 +1,9 @@
+{
+  "name": "Reloj Web",
+  "short_name": "Reloj",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#22223b",
+  "icons": []
+}

@@ -1,0 +1,88 @@
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.notification-message {
+  background: linear-gradient(135deg, rgba(106,156,222,0.95) 0%, rgba(94,134,190,0.95) 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 400px;
+  animation: slideIn 0.3s ease-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.notification-message.success {
+  background: linear-gradient(135deg, rgba(72,187,120,0.95) 0%, rgba(56,161,105,0.95) 100%);
+}
+
+.notification-message.warning {
+  background: linear-gradient(135deg, rgba(246,173,85,0.95) 0%, rgba(237,137,54,0.95) 100%);
+}
+
+.notification-message.error {
+  background: linear-gradient(135deg, rgba(245,101,101,0.95) 0%, rgba(229,62,62,0.95) 100%);
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 1.1em;
+}
+
+.notification-body {
+  opacity: 0.9;
+  font-size: 0.95em;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: white;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  margin-left: 12px;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

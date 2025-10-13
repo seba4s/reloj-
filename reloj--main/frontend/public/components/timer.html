@@ -1,0 +1,15 @@
+<section class="component-container" id="timer-component">
+  <h2 style="color: var(--header-text); margin-bottom: 1.5rem;">Temporizador</h2>
+  <form id="timer-form" class="component-form">
+    <label>
+      Minutos
+      <input type="number" name="minutes" min="0" value="1">
+    </label>
+    <button type="submit" class="component-button">Iniciar</button>
+  </form>
+  <div id="timer-display" class="time-display">00:00</div>
+  <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+    <button id="timer-stop" class="component-button">Detener</button>
+    <button id="timer-reset" class="component-button">Reiniciar</button>
+  </div>
+</section>

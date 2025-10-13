@@ -1,0 +1,262 @@
+/* Estilo para el cuadro de información ambiental */
+/* Estilos comunes para todos los componentes */
+.component-container {
+  padding: 24px;
+  border-radius: 18px;
+  margin: 32px auto;
+  background: #000845;
+  max-width: 600px;
+  min-width: 340px;
+  width: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  position: relative;
+  box-sizing: border-box;
+  opacity: 70%;
+}
+
+.component-container:hover {
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+
+/* Estilos para formularios */
+.component-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.component-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--header-text);
+  font-size: 0.9rem;
+}
+
+.component-form input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  color: var(--header-text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.component-form input:focus {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(106,156,222,0.3);
+}
+
+/* Botones estilizados */
+.component-button {
+  background: rgba(106,156,222,0.2);
+  color: var(--header-text);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.component-button:hover {
+  background: rgba(106,156,222,0.3);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-1px);
+}
+
+.component-button:active {
+  transform: translateY(1px);
+}
+
+/* Lista de elementos */
+.component-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.component-list li {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.component-list li:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* Displays de tiempo */
+.time-display {
+  font-family: 'Letter Magic', monospace;
+  font-size: 3rem;
+  color: var(--header-text);
+  text-align: center;
+  margin: 1rem 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.env-display {
+  padding: 24px;
+  border-radius: 18px;
+  margin: 32px auto;
+  max-width: 600px;
+  min-width: 340px;
+  width: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.env-display .weather-info-panel {
+  background: linear-gradient(135deg, #f8fafc 0%, #e6ecf5 100%);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px 0 rgba(44,54,94,0.08);
+  padding: 24px;
+  margin: 16px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid rgba(44,54,94,0.07);
+}
+/* Barra de navegación inferior */
+#bottom-nav-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+#bottom-nav-bar nav {
+  background: rgba(62, 95, 138, 0.7);
+  border-radius: 2rem 2rem 0 0;
+  display: flex;
+  gap: 1.2rem;
+  padding: 0.7rem 2.5rem 0.7rem 2.5rem;
+  box-shadow: 0 -2px 16px rgba(62,95,138,0.10);
+  pointer-events: auto;
+}
+#bottom-nav-bar button {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  outline: none;
+  min-width: 120px;
+  margin: 0;
+  cursor: pointer;
+}
+#bottom-nav-bar button:hover, #bottom-nav-bar button:focus {
+  background: rgba(255,255,255,0.22);
+  color: #cadffb;
+  box-shadow: 0 2px 8px rgba(106,156,222,0.10);
+}
+#bottom-nav-bar #theme-toggle {
+  min-width: 48px;
+  padding: 0.7rem 1rem;
+  background: rgba(255,255,255,0.18);
+  color: #ffb300;
+  font-size: 1.5rem;
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: 0 2px 8px rgba(0,8,69,0.10);
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+#bottom-nav-bar #theme-toggle:hover, #bottom-nav-bar #theme-toggle:focus {
+  background: rgba(255,255,255,0.32);
+  color: #fffbe6;
+  border: 2px solid #ffb300;
+}
+#clock-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  width: 100vw;
+  margin: 0 auto 0 auto;
+  z-index: 2;
+}
+/* Centrado vertical y horizontal del reloj */
+#clock-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 35vh;
+  width: 100vw;
+  margin: 0 auto 0 auto;
+}
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+  color: #22223b;
+}
+header {
+  background: #22223b;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+header h1 {
+  margin: 0 auto 1rem auto;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 4rem;
+  text-align: center;
+  color: var(--header-text, #cadffb);
+  text-shadow: 0 2px 16px rgba(62, 95, 138, 0.15);
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+nav button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #4a4e69;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+nav button:hover {
+  background: #9a8c98;
+}
+main {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
