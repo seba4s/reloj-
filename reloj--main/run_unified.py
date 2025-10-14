@@ -30,7 +30,9 @@ if __name__ == '__main__':
         print("Presiona Ctrl+C para detener")
         print()
         
-        app.run(host='0.0.0.0', port=5000, debug=True)
+        # Desactivar debug para evitar reinicios automáticos
+        # Cambiar a debug=True si necesitas debugging
+        app.run(host='0.0.0.0', port=5000, debug=False)
     except ImportError as e:
         print(f"❌ Error al importar la aplicación: {e}")
         print(f"📂 Directorio actual: {current_dir}")

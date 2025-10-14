@@ -7,20 +7,6 @@ const triggeredAlarms = new Set();
 // Variable para mantener la lista de alarmas actual
 let currentAlarms = [];
 
-// Función para mostrar notificaciones
-function showNotification(title, message) {
-  // Mostrar notificación en la página
-  showPageNotification(title, message, 'warning');
-  
-  // También mostrar notificación del sistema si está permitido
-  if (Notification.permission === 'granted') {
-    new Notification(title, {
-      body: message,
-      icon: '/assets/alarm-icon.png'
-    });
-  }
-}
-
 // Función para verificar si una alarma debe sonar
 function checkAlarm(alarm) {
   const now = new Date();
@@ -43,7 +29,8 @@ function checkAlarm(alarm) {
     showNotification('¡Alarma!', 
       alarm.label ? 
       `¡Es hora de ${alarm.label}!` : 
-      '¡Es hora de tu alarma!'
+      '¡Es hora de tu alarma!',
+      'warning'
     );
     triggeredAlarms.add(alarmKey);
   }
@@ -96,18 +83,14 @@ function initAlarms() {
   
   if (form) {
     // Solicitar permisos de notificación al cargar
-    if (Notification.permission === 'default') {
-      Notification.requestPermission();
-    }
+    requestNotificationPermission();
     
     form.onsubmit = e => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(e.target));
       
       // Asegurarnos de tener permisos de notificación
-      if (Notification.permission === 'default') {
-        Notification.requestPermission();
-      }
+      requestNotificationPermission();
       
       fetch(api, {
         method: 'POST',
@@ -131,8 +114,4 @@ function initAlarms() {
 }
 
 // Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initAlarms);
-} else {
-  initAlarms();
-}
+initComponent(initAlarms);

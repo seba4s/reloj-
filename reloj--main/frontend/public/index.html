@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TempoClock</title>
+  <link rel="icon" type="image/png" href="/assets/TempoReloj.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Letter+Magic&display=swap" rel="stylesheet">
@@ -22,7 +23,8 @@
       <button onclick="showComponent('stopwatch')">Cronómetro</button>
       <button onclick="showComponent('timer')">Temporizador</button>
       <button onclick="showComponent('envclock')">Reloj Ambiental</button>
-      <button id="theme-toggle" aria-label="Cambiar modo claro/oscuro" style="margin-left:1rem; border-radius:999px; padding:0.5rem 1rem; background:var(--accent); color:var(--white); border:none; cursor:pointer;">🌙</button>
+      <button id="clock-mode-toggle" onclick="toggleClockMode()" aria-label="Cambiar entre reloj digital y analógico" style="margin-left:1rem; border-radius:999px; padding:0.5rem 1rem; background:var(--secondary); color:var(--white); border:none; cursor:pointer;" title="Cambiar a reloj analógico">🕐</button>
+      <button id="theme-toggle" aria-label="Cambiar modo claro/oscuro" style="margin-left:0.5rem; border-radius:999px; padding:0.5rem 1rem; background:var(--accent); color:var(--white); border:none; cursor:pointer;">🌙</button>
     </nav>
   </div>
   <div id="clock-center-container">
@@ -32,6 +34,8 @@
     <!-- Los componentes se cargarán aquí -->
   </main>
   <script src="/js/notifications.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/analog-clock-ui.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/animated-bg.js"></script>
 </body>

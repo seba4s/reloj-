@@ -1,39 +1,58 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-.venv/
-venv/
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
+#############################
+# General
+#############################
 .DS_Store
 Thumbs.db
+*.log
+*.tmp
+*.swp
+
+#############################
+# Python
+#############################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+.venv/
+venv/
+ENV/
+env/
+
+# If nested project folder exists, ignore its envs too
+reloj--main/.venv/
+reloj--main/**/__pycache__/
+
+#############################
+# Node / Frontend
+#############################
+node_modules/
+frontend/node_modules/
+reloj--main/frontend/node_modules/
+dist/
+build/
+.parcel-cache/
+.vite/
+.next/
+
+#############################
+# VS Code / IDE
+#############################
+.vscode/
+.idea/
+reloj--main/.vscode/
+
+#############################
+# Environment / secrets
+#############################
+.env
+.env.*
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+

@@ -3,35 +3,15 @@ const timerApi = '/api/timer/';
 let interval = null;
 let lastRemaining = null;
 
-// Función para mostrar notificaciones
-function showNotification(title, message) {
-  // Mostrar notificación en la página
-  showPageNotification(title, message, 'warning');
-  
-  // También mostrar notificación del sistema si está permitido
-  if (Notification.permission === 'granted') {
-    new Notification(title, {
-      body: message,
-      icon: '/assets/timer-icon.png'
-    });
-  }
-}
-
-function formatTime(s) {
-  const min = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
-  return `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
-}
-
 function updateDisplay() {
   fetch(timerApi)
     .then(r => r.json())
     .then(data => {
-      document.getElementById('timer-display').textContent = formatTime(data.remaining);
+      document.getElementById('timer-display').textContent = formatTimeMMSS(data.remaining);
       
       // Verificar si el temporizador llegó a cero
       if (lastRemaining !== null && lastRemaining > 0 && data.remaining <= 0) {
-        showNotification('¡Temporizador finalizado!', 'El tiempo se ha acabado');
+        showNotification('¡Temporizador finalizado!', 'El tiempo se ha acabado', 'warning');
       }
       
       lastRemaining = data.remaining;
@@ -54,9 +34,7 @@ document.getElementById('timer-form').onsubmit = e => {
   }
   
   // Pedir permiso para notificaciones al iniciar un temporizador
-  if (Notification.permission !== 'granted') {
-    Notification.requestPermission();
-  }
+  requestNotificationPermission();
   
   fetch(timerApi + 'start', {
     method: 'POST',

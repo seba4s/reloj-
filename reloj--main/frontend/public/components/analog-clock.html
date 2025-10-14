@@ -1,0 +1,283 @@
+<!-- Reloj Analógico Circular -->
+<div class="analog-clock-container">
+  <!-- Círculo del reloj -->
+  <div class="analog-clock">
+    <!-- Marcadores de horas -->
+    <div class="clock-markers">
+      <div class="marker hour-marker" style="--i: 0"><span>12</span></div>
+      <div class="marker hour-marker" style="--i: 1"><span>1</span></div>
+      <div class="marker hour-marker" style="--i: 2"><span>2</span></div>
+      <div class="marker hour-marker" style="--i: 3"><span>3</span></div>
+      <div class="marker hour-marker" style="--i: 4"><span>4</span></div>
+      <div class="marker hour-marker" style="--i: 5"><span>5</span></div>
+      <div class="marker hour-marker" style="--i: 6"><span>6</span></div>
+      <div class="marker hour-marker" style="--i: 7"><span>7</span></div>
+      <div class="marker hour-marker" style="--i: 8"><span>8</span></div>
+      <div class="marker hour-marker" style="--i: 9"><span>9</span></div>
+      <div class="marker hour-marker" style="--i: 10"><span>10</span></div>
+      <div class="marker hour-marker" style="--i: 11"><span>11</span></div>
+    </div>
+    
+    <!-- Marcadores de minutos (más pequeños) -->
+    <div class="clock-minute-markers">
+      <!-- 60 marcadores pequeños -->
+    </div>
+    
+    <!-- Centro del reloj -->
+    <div class="clock-center"></div>
+    
+    <!-- Manecillas -->
+    <div class="hand hour-hand" id="hour-hand"></div>
+    <div class="hand minute-hand" id="minute-hand"></div>
+    <div class="hand second-hand" id="second-hand"></div>
+    
+    <!-- Punto central -->
+    <div class="clock-cap"></div>
+  </div>
+  
+  <!-- Fecha debajo del reloj -->
+  <div class="analog-clock-date" id="analog-clock-date">
+    <span id="analog-date-text">--</span>
+  </div>
+</div>
+
+<style>
+/* Contenedor principal del reloj analógico */
+.analog-clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 400px;
+}
+
+/* Reloj circular */
+.analog-clock {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  border: 8px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 0 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modo oscuro */
+.dark-mode .analog-clock {
+  background: linear-gradient(145deg, rgba(30, 30, 50, 0.8), rgba(20, 20, 40, 0.9));
+  border-color: rgba(100, 150, 255, 0.3);
+  box-shadow: 
+    0 0 40px rgba(100, 150, 255, 0.2),
+    inset 0 0 40px rgba(100, 150, 255, 0.1);
+}
+
+/* Marcadores de horas */
+.clock-markers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hour-marker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform: rotate(calc(var(--i) * 30deg));
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.hour-marker span {
+  display: inline-block;
+  padding-top: 10px;
+  transform: rotate(calc(var(--i) * -30deg));
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Marcadores de minutos */
+.clock-minute-markers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Manecillas */
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 10px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hour-hand {
+  width: 8px;
+  height: 80px;
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+  margin-left: -4px;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.minute-hand {
+  width: 6px;
+  height: 110px;
+  background: linear-gradient(180deg, var(--accent), var(--secondary));
+  margin-left: -3px;
+  z-index: 4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.second-hand {
+  width: 3px;
+  height: 120px;
+  background: #e74c3c;
+  margin-left: -1.5px;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.5);
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animación suave para el segundero */
+.second-hand.smooth {
+  transition: transform 1s linear;
+}
+
+/* Centro del reloj */
+.clock-center {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  z-index: 6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Tapa central decorativa */
+.clock-cap {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .clock-cap {
+  background: #2c3e50;
+  border: 2px solid rgba(100, 150, 255, 0.5);
+}
+
+/* Fecha debajo del reloj */
+.analog-clock-date {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .analog-clock-date {
+  background: rgba(30, 30, 50, 0.6);
+  border-color: rgba(100, 150, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .analog-clock {
+    width: 250px;
+    height: 250px;
+    border-width: 6px;
+  }
+  
+  .hour-hand {
+    height: 65px;
+    width: 7px;
+    margin-left: -3.5px;
+  }
+  
+  .minute-hand {
+    height: 90px;
+    width: 5px;
+    margin-left: -2.5px;
+  }
+  
+  .second-hand {
+    height: 100px;
+    width: 2px;
+    margin-left: -1px;
+  }
+  
+  .hour-marker {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .analog-clock {
+    width: 200px;
+    height: 200px;
+    border-width: 5px;
+  }
+  
+  .hour-hand {
+    height: 50px;
+    width: 6px;
+    margin-left: -3px;
+  }
+  
+  .minute-hand {
+    height: 70px;
+    width: 4px;
+    margin-left: -2px;
+  }
+  
+  .second-hand {
+    height: 80px;
+  }
+  
+  .hour-marker {
+    font-size: 0.9rem;
+  }
+  
+  .hour-marker span {
+    padding-top: 8px;
+  }
+}
+
+/* Animación de entrada */
+@keyframes clockFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.analog-clock-container {
+  animation: clockFadeIn 0.5s ease-out;
+}
+</style>

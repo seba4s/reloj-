@@ -2,19 +2,11 @@
 const stopwatchApi = '/api/stopwatch/';
 let interval = null;
 
-function formatTime(s) {
-  const ms = Math.floor((s % 1) * 10);
-  const sec = Math.floor(s) % 60;
-  const min = Math.floor(s / 60) % 60;
-  const hr = Math.floor(s / 3600);
-  return `${hr.toString().padStart(2,'0')}:${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}.${ms}`;
-}
-
 function updateDisplay() {
   fetch(stopwatchApi)
     .then(r => r.json())
     .then(data => {
-      document.getElementById('stopwatch-display').textContent = formatTime(data.elapsed);
+      document.getElementById('stopwatch-display').textContent = formatTimeHHMMSSMS(data.elapsed);
     });
 }
 
@@ -64,10 +56,6 @@ function initStopwatch() {
 }
 
 // Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initStopwatch);
-} else {
-  initStopwatch();
-}
+initComponent(initStopwatch);
 
 updateDisplay();
