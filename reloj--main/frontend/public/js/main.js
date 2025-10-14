@@ -30,6 +30,28 @@ function startClock() {
   setInterval(updateClock, 1000);
 }
 
+// Función para calcular la posición del sol/luna según la hora
+function calculateSunMoonPosition() {
+  const now = new Date();
+  const hour = now.getHours();
+  const isDay = hour >= 6 && hour < 18;
+  
+  let angle;
+  if (isDay) {
+    const dayProgress = (hour - 6 + now.getMinutes()/60) / 12;
+    angle = Math.PI * dayProgress;
+  } else {
+    const nightHour = hour >= 18 ? hour - 18 : hour + 6;
+    const nightProgress = (nightHour + now.getMinutes()/60) / 12;
+    angle = Math.PI * nightProgress;
+  }
+  
+  const cx = 1200 + 400 * Math.cos(angle);
+  const cy = 400 - 250 * Math.sin(angle);
+  
+  return { cx, cy, isDay };
+}
+
 // Modo claro/oscuro
 function setTheme(mode) {
   const body = document.body;
@@ -38,86 +60,111 @@ function setTheme(mode) {
 
   if (svg) {
     const sky = svg.getElementById('sky');
+    const mountainsBack = svg.getElementById('mountains-back');
     const mountains = svg.getElementById('mountains');
     const mountains2 = svg.getElementById('mountains2');
+    const mountains3 = svg.getElementById('mountains3');
     const sunMoon = svg.getElementById('sun-moon');
 
-    // Agregar clases base
-    sky.classList.add('sky', 'bg-element');
-    mountains.classList.add('mountains', 'bg-element');
-    mountains2.classList.add('mountains', 'bg-element');
-    sunMoon.classList.add('celestial-body');
-
-    // Limpiar clases previas
-    sunMoon.classList.remove('sun-exit', 'sun-enter', 'moon-exit', 'moon-enter');
-    sky.classList.remove('sky-day', 'sky-dawn', 'sky-dusk', 'sky-night');
-    mountains.classList.remove('mountains-day', 'mountains-dawn', 'mountains-dusk', 'mountains-night');
-    mountains2.classList.remove('mountains-day', 'mountains-dawn', 'mountains-dusk', 'mountains-night');
+    // Calcular posición correcta según la hora
+    const { cx, cy, isDay } = calculateSunMoonPosition();
 
     if (mode === 'dark') {
-      // Iniciar transición a oscuro
-      sunMoon.setAttribute('fill', '#ff6a00');
-      sunMoon.classList.add('sun-exit');
-
-      // Secuencia suave día -> atardecer -> noche
-      requestAnimationFrame(() => {
-        sky.classList.add('sky-dusk');
-        mountains.classList.add('mountains-dusk');
-        mountains2.classList.add('mountains-dusk');
-      });
-
-      // Transición suave a noche
+      // Paso 1: Transición a atardecer (dusk)
+      if (sky) sky.setAttribute('fill', 'url(#skyDusk)');
+      if (mountainsBack) mountainsBack.setAttribute('fill', 'url(#mountainDusk)');
+      if (mountains) mountains.setAttribute('fill', 'url(#mountainDusk)');
+      if (mountains2) mountains2.setAttribute('fill', 'url(#mountainDusk)');
+      if (mountains3) mountains3.setAttribute('fill', 'url(#mountainDusk)');
+      
+      // Animación: el sol baja en diagonal
+      if (sunMoon) {
+        const currentCx = parseFloat(sunMoon.getAttribute('cx'));
+        const currentCy = parseFloat(sunMoon.getAttribute('cy'));
+        
+        sunMoon.style.transition = 'cx 1.5s ease-in-out, cy 1.5s ease-in-out, opacity 1.2s ease-in-out';
+        sunMoon.setAttribute('cx', currentCx - 200);
+        sunMoon.setAttribute('cy', 1200);
+        sunMoon.style.opacity = '0';
+        
+        // Paso 2: Después del atardecer, transición a noche
+        setTimeout(() => {
+          if (sky) sky.setAttribute('fill', 'url(#skyNight)');
+          if (mountainsBack) mountainsBack.setAttribute('fill', 'url(#mountainNight)');
+          if (mountains) mountains.setAttribute('fill', 'url(#mountainNight)');
+          if (mountains2) mountains2.setAttribute('fill', 'url(#mountainNight)');
+          if (mountains3) mountains3.setAttribute('fill', 'url(#mountainNight)');
+          
+          // Cambiar a luna y hacerla subir
+          sunMoon.setAttribute('fill', '#fffbe6');
+          sunMoon.setAttribute('cx', cx + 200);
+          sunMoon.setAttribute('cy', 1200);
+          sunMoon.style.opacity = '0';
+          
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              sunMoon.style.opacity = '1';
+              sunMoon.setAttribute('cx', cx);
+              sunMoon.setAttribute('cy', cy);
+            });
+          });
+        }, 2000);
+      }
+      
+      // Cambiar a modo nocturno
       setTimeout(() => {
-        sky.classList.remove('sky-dusk');
-        mountains.classList.remove('mountains-dusk');
-        mountains2.classList.remove('mountains-dusk');
-        
-        sky.classList.add('sky-night');
-        mountains.classList.add('mountains-night');
-        mountains2.classList.add('mountains-night');
-        
         body.classList.add('dark-mode');
         if (btn) btn.textContent = '☀️';
-
-        // Cambiar a luna y hacerla entrar
-        sunMoon.setAttribute('fill', '#fffbe6');
-        sunMoon.classList.remove('sun-exit');
-        sunMoon.classList.add('moon-enter');
-      }, 500);
+      }, 1000);
+      
     } else {
-      // Iniciar transición a claro
-      sunMoon.setAttribute('fill', '#fffbe6');
-      sunMoon.classList.add('moon-exit');
-
-      // Transición al amanecer
-      sky.classList.add('sky-dusk');
-      mountains.classList.add('mountains-dusk');
-      mountains2.classList.add('mountains-dusk');
-
-      // Esperar a que la luna esté a medio salir
+      // Paso 1: Transición a amanecer (dawn)
+      if (sky) sky.setAttribute('fill', 'url(#skyDawn)');
+      if (mountainsBack) mountainsBack.setAttribute('fill', 'url(#mountainDawn)');
+      if (mountains) mountains.setAttribute('fill', 'url(#mountainDawn)');
+      if (mountains2) mountains2.setAttribute('fill', 'url(#mountainDawn)');
+      if (mountains3) mountains3.setAttribute('fill', 'url(#mountainDawn)');
+      
+      // Animación: la luna baja en diagonal
+      if (sunMoon) {
+        const currentCx = parseFloat(sunMoon.getAttribute('cx'));
+        const currentCy = parseFloat(sunMoon.getAttribute('cy'));
+        
+        sunMoon.style.transition = 'cx 1.5s ease-in-out, cy 1.5s ease-in-out, opacity 1.2s ease-in-out';
+        sunMoon.setAttribute('cx', currentCx - 200);
+        sunMoon.setAttribute('cy', 1200);
+        sunMoon.style.opacity = '0';
+        
+        // Paso 2: Después del amanecer, transición a día
+        setTimeout(() => {
+          if (sky) sky.setAttribute('fill', 'url(#skyDay)');
+          if (mountainsBack) mountainsBack.setAttribute('fill', 'url(#mountainDay)');
+          if (mountains) mountains.setAttribute('fill', 'url(#mountainDay)');
+          if (mountains2) mountains2.setAttribute('fill', 'url(#mountainDay)');
+          if (mountains3) mountains3.setAttribute('fill', 'url(#mountainDay)');
+          
+          // Cambiar a sol y hacerlo subir
+          sunMoon.setAttribute('fill', '#ff6a00');
+          sunMoon.setAttribute('cx', cx + 200);
+          sunMoon.setAttribute('cy', 1200);
+          sunMoon.style.opacity = '0';
+          
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              sunMoon.style.opacity = '1';
+              sunMoon.setAttribute('cx', cx);
+              sunMoon.setAttribute('cy', cy);
+            });
+          });
+        }, 2000);
+      }
+      
+      // Cambiar a modo diurno
       setTimeout(() => {
-        sky.classList.remove('sky-dusk');
-        mountains.classList.remove('mountains-dusk');
-        mountains2.classList.remove('mountains-dusk');
-        
-        sky.classList.add('sky-day');
-        mountains.classList.add('mountains-day');
-        mountains2.classList.add('mountains-day');
-        
         body.classList.remove('dark-mode');
         if (btn) btn.textContent = '🌙';
-
-        // Cambiar a sol y hacerlo entrar
-        sunMoon.setAttribute('fill', '#ff6a00');
-        sunMoon.classList.remove('moon-exit');
-        sunMoon.classList.add('sun-enter');
-      }, 500);
+      }, 1000);
     }
-
-    // Limpiar clases de animación después de la transición completa
-    setTimeout(() => {
-      sunMoon.classList.remove('sun-rise', 'moon-rise');
-    }, 2000);
   } else {
     // Fallback sin animación si no existe el SVG
     if (mode === 'dark') {
