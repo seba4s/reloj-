@@ -1,0 +1,22 @@
+/* Temas de color */
+:root {
+  --primary: #22223b;
+  --secondary: #4a4e69;
+  --accent: #9a8c98;
+  --bg: #f8f9fa;
+  --white: #fff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--primary);
+}
+header {
+  background: var(--primary);
+}
+nav button {
+  background: var(--secondary);
+}
+nav button:hover {
+  background: var(--accent);
+}
